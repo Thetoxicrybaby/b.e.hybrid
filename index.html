@@ -196,7 +196,7 @@
 
 <header>
     <div class="logo-group">
-        <img class="logo-icon" src="assets/logo.png" alt="B.E Hybrid лого">
+        <img class="logo-icon" src="./logo.png" alt="B.E Hybrid лого">
         <div class="logo-text brand-mark">B.E <span>HYBRID</span></div>
     </div>
     <nav class="primary-nav">
@@ -247,7 +247,7 @@
         </div>
         <div class="services-grid">
             <div class="service-card">
-                <div class="photo"><img src="assets/service-parts.jpg" alt="Япон задаргааны сэлбэг" loading="lazy"></div>
+                <div class="photo"><img src="./service-parts.jpg" alt="Япон задаргааны сэлбэг" loading="lazy"></div>
                 <div class="body">
                     <div class="icon">🇯🇵</div>
                     <h3>Япон Задаргааны Сэлбэг</h3>
@@ -255,7 +255,7 @@
                 </div>
             </div>
             <div class="service-card">
-                <div class="photo"><img src="assets/service-repair.jpg" alt="Засвар үйлчилгээ" loading="lazy"></div>
+                <div class="photo"><img src="./service-repair.jpg" alt="Засвар үйлчилгээ" loading="lazy"></div>
                 <div class="body">
                     <div class="icon">🛠️</div>
                     <h3>Засвар Үйлчилгээ</h3>
@@ -263,7 +263,7 @@
                 </div>
             </div>
             <div class="service-card">
-                <div class="photo"><img src="assets/service-diagnostic.jpg" alt="Компьютер оношилгоо" loading="lazy"></div>
+                <div class="photo"><img src="./service-diagnostic.jpg" alt="Компьютер оношилгоо" loading="lazy"></div>
                 <div class="body">
                     <div class="icon">🔋</div>
                     <h3>Компьютер Оношилгоо</h3>
@@ -271,7 +271,7 @@
                 </div>
             </div>
             <div class="service-card">
-                <div class="photo"><img src="assets/service-oil.jpg" alt="Тос, хөргөлтийн шингэн солих" loading="lazy"></div>
+                <div class="photo"><img src="./service-oil.jpg" alt="Тос, хөргөлтийн шингэн солих" loading="lazy"></div>
                 <div class="body">
                     <div class="icon">🛢️</div>
                     <h3>Тос & Хөргөлтийн Шингэн</h3>
@@ -348,6 +348,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://unpkg.com/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
 <script>
 (function () {
     const container = document.getElementById('hero-canvas-container');
@@ -403,7 +404,7 @@
     }
 
     const texLoader = new THREE.TextureLoader();
-    texLoader.load('assets/building-hero.png', (tex) => {
+    texLoader.load('./building-hero.png', (tex) => {
         tex.encoding = THREE.sRGBEncoding;
         const aspect = tex.image.width / tex.image.height;
         const bw = 26, bh = bw / aspect;
@@ -420,8 +421,11 @@
 
     const wheelPivots = [];
 
+    const dracoLoader = new THREE.DRACOLoader();
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
     const gltfLoader = new THREE.GLTFLoader();
-    gltfLoader.load('assets/prius30-v2.glb', (gltf) => {
+    gltfLoader.setDRACOLoader(dracoLoader);
+    gltfLoader.load('./prius30-v2-v1.glb', (gltf) => {
         const model = gltf.scene;
         const box = new THREE.Box3().setFromObject(model);
         const size = new THREE.Vector3(); box.getSize(size);
